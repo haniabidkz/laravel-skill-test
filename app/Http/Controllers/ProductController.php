@@ -17,5 +17,36 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        // Add datetime and calculate total value
+        $newEntry = [
+            'name' => $data['name'],
+            'quantity' => $data['quantity'],
+            'price' => $data['price'],
+            'datetime_submitted' => now()->toDateTimeString(),
+            'total_value' => $data['quantity'] * $data['price'],
+        ];
+
+        // Save to JSON file
+        $jsonData = public_path('products.json');
+        $existingData = [];
+        if (file_exists($jsonData)) {
+            $existingData = json_decode(file_get_contents($jsonData), true);
+        }
+        $existingData[] = $newEntry;
+        file_put_contents($jsonData, json_encode($existingData, JSON_PRETTY_PRINT));
+
+    
+        return response()->json(['success' => true, 'data' => $existingData]);
+    }
+
     
 }

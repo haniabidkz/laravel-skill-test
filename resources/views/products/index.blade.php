@@ -66,7 +66,7 @@
     <script>
         var productData;
         var newRow;
-        $('#productForm').on('submit', function(e) {
+        $('#addProductForm').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
                 url: '/add',
@@ -89,8 +89,8 @@
                         $('#productBody').find('tr:last').before(newRow);
 
                         let total = parseFloat($('#productBody tr:last td:last').text()) || 0;
-                        total += newProduct.total_value;
-                        $('#productBody tr:last td:last').text(total.toFixed(2));
+                        total += productData.total_value;
+                        $('#productBody tr:last td:last').html('<strong>'+total.toFixed(2)+'</strong>');
 
                         // Clear the form fields
                         $('#productForm')[0].reset();
