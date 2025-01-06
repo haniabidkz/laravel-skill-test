@@ -48,5 +48,38 @@ class ProductController extends Controller
         return response()->json(['success' => true, 'data' => $existingData]);
     }
 
+    public function edit(Request $request)
+    {
+        $data = $request->validate([
+            'id' => 'required|integer',
+            'name' => 'required|string|max:255',
+            'quantity' => 'required|integer',
+            'price' => 'required|numeric',
+        ]);
+
+        $jsonData = public_path('products.json');
+        $existingData = [];
+
+        if (file_exists($jsonData)) {
+            $existingData = json_decode(file_get_contents($jsonData), true);
+        }
+
+        // Update the product data
+        if (isset($existingData[$data['id']])) {
+            $existingData[$data['id']] = [
+                'name' => $data['name'],
+                'quantity' => $data['quantity'],
+                'price' => $data['price'],
+                'datetime_submitted' => now()->toDateTimeString(),
+                'total_value' => $data['quantity'] * $data['price'],
+            ];
+
+            file_put_contents($jsonData, json_encode($existingData, JSON_PRETTY_PRINT));
+        }
+
+        return response()->json(['success' => true, 'data' => $existingData]);
+    }
+
+
     
 }

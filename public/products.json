@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Shoes",
+        "quantity": "1",
+        "price": "10",
+        "datetime_submitted": "2025-01-06 23:26:18",
+        "total_value": 10
+    },
+    {
+        "name": "Tshirt",
+        "quantity": "20",
+        "price": "5",
+        "datetime_submitted": "2025-01-06 23:21:19",
+        "total_value": 100
+    },
+    {
+        "name": "Shirts",
+        "quantity": "20",
+        "price": "2",
+        "datetime_submitted": "2025-01-06 23:24:09",
+        "total_value": 40
+    },
+    {
+        "name": "Laptop",
+        "quantity": "10",
+        "price": "100",
+        "datetime_submitted": "2025-01-06 23:25:57",
+        "total_value": 1000
+    }
+]

@@ -23,3 +23,5 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', [ProductController::class, 'index']);
 Route::post('/add', [ProductController::class, 'store']);
+Route::post('/edit', [ProductController::class, 'edit']);
+
